@@ -1,8 +1,6 @@
 # Socket.io chat
 **Task:**
 
-****
-
 **Socket.io multiplayer chat with use Node.js server**
 
     The server side with basic knowledge of client-side
