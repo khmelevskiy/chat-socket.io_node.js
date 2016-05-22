@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+    <title>node-chat</title>
+    <script src="/js/jquery-1.12.3.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/socket.io.min.js"></script>
+    <script src="/js/code.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close " data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title center" id="myModalLabel">Enter nickname:</h4>
+            </div>
+            <div class="modal-body center" id="modalEdit">
+                <div class="form-group center">
+                    <strong>nickname:</strong>
+                    <input type="text" class="form-control center" id="nickname" placeholder="at least 3 symbols">
+                    <div class="alert alert-error center" id="alert-error">
+                        Minimum nickname length must be 3 symbols!
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="login">log In</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container" id="container">
+    <div class="row">
+        <div class="span12">
+            <button type="submit" class="btn btn-mini btn-danger" id="btnExit"><i class="icon-off"></i></button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span9 background">
+            <div class="well well-small center">
+                <i class="icon-comment"></i>Happy talking!
+            </div>
+            <ul id="messages">
+            </ul>
+            <form role="form" id="foother">
+                <div class="form-group">
+                    <input class="span9" type="text" id="m" placeholder="Enter message" autocomplete="off">
+                    <br>
+                    <button type="submit" class="btn span9 btn-info" id="btnSend">Send</button>
+                </div>
+            </form>
+        </div>
+        <div class="span3" id="divContactList">
+            <div class="well well-small center">
+                <i class="icon-user"></i>Online:
+            </div>
+            <div id="сontactList">
+                <ul class="list-group">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
