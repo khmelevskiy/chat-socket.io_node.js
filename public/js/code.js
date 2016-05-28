@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var HeightPad = 67;
+    const HeightPad = 67;
     $('.modal-backdrop.fade.in').show();
     $('.close').remove();
     $('#btnSend').prop("disabled", true);
@@ -9,30 +9,30 @@ $(document).ready(function () {
         show: true
     });
 
-    $('#сontactList').height(($(window).height()) - ($(".well.well-small").height() + HeightPad));
-    $('#messages').height(($(window).height()) - (($("#foother").height()) + ($(".well.well-small").height() + HeightPad)));
+    let sizeHeight = () => {
+        $('#сontactList').height(($(window).height()) - ($(".well.well-small").height() + HeightPad));
+        $('#messages').height(($(window).height()) - (($("#foother").height()) + ($(".well.well-small").height() + HeightPad)));
+    };
+    sizeHeight();
 
     $(window).resize(function () {
-        $('#сontactList').height(($(window).height()) - ($(".well.well-small").height() + HeightPad));
-        $('#messages').height(($(window).height()) - (($("#foother").height()) + ($(".well.well-small").height() + HeightPad)));
+        sizeHeight();
     });
     $('#messages').resize(function () {
-        $('#сontactList').height(($(window).height()) - ($(".well.well-small").height() + HeightPad));
-        $('#messages').height(($(window).height()) - (($("#foother").height()) + ($(".well.well-small").height() + HeightPad)));
+        sizeHeight();
     });
     $('#сontactList').resize(function () {
-        $('#сontactList').height(($(window).height()) - ($(".well.well-small").height() + HeightPad));
-        $('#messages').height(($(window).height()) - (($("#foother").height()) + ($(".well.well-small").height() + HeightPad)));
+        sizeHeight();
     });
 
-    var socket = io();
+    const socket = io();
     socket.on('userList', function (userList) {
         for (const user of userList) {
             $('.list-group').prepend($('<li class="list-group-item" id=' + user + '>').text(user));
         }
     });
 
-    var nick = $('#nickname').val();
+    let nick = $('#nickname').val();
     socket.emit('disconnect', nick);
     socket.on('disconnect', function (nickName) {
         if (($('#' + nickName)) != null) {
@@ -41,7 +41,7 @@ $(document).ready(function () {
     });
 
     $(window).unload(function () {
-        var nick = $('#nickname').val();
+        let nick = $('#nickname').val();
         socket.emit('chat message', '[' + (new Date).toLocaleTimeString() + '] ' + 'user "' + nick + '": disconnected');
     });
 
@@ -58,7 +58,6 @@ $(document).ready(function () {
     });
 
     $("#login").click(function () {
-        var nick = $('#nickname').val();
         if ($('#nickname').val().length > 2) {
             $('#myModal').modal('hide');
             $('#btnSend').prop("disabled", false);
@@ -77,3 +76,4 @@ $(document).ready(function () {
         window.location.reload();
     });
 });
+
