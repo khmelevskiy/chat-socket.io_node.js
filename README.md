@@ -44,3 +44,4 @@
     frameworks are not allowed.The chat should work in modern versions of Google Chrome browser, support
     cross-browser is not required.
 
+
