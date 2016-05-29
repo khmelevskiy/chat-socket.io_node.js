@@ -1,3 +1,4 @@
+"use strict";
 $(document).ready(function () {
     const HeightPad = 67;
     $('.modal-backdrop.fade.in').show();
@@ -27,7 +28,7 @@ $(document).ready(function () {
 
     const socket = io();
     socket.on('userList', function (userList) {
-        for (const user of userList) {
+        for (let user of userList) {
             $('.list-group').prepend($('<li class="list-group-item" id=' + user + '>').text(user));
         }
     });
@@ -58,6 +59,7 @@ $(document).ready(function () {
     });
 
     $("#login").click(function () {
+        let nick = $('#nickname').val();
         if ($('#nickname').val().length > 2) {
             $('#myModal').modal('hide');
             $('#btnSend').prop("disabled", false);
@@ -76,4 +78,3 @@ $(document).ready(function () {
         window.location.reload();
     });
 });
-
