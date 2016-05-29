@@ -1,5 +1,5 @@
 "use strict";
-$(document).ready(function () {
+$(document).ready(() => {
     const HeightPad = 67;
     $('.modal-backdrop.fade.in').show();
     $('.close').remove();
@@ -16,18 +16,19 @@ $(document).ready(function () {
     };
     sizeHeight();
 
-    $(window).resize(function () {
+    $(window).resize(() => {
         sizeHeight();
     });
-    $('#messages').resize(function () {
+    $('#messages').resize(() => {
         sizeHeight();
     });
-    $('#сontactList').resize(function () {
+    $('#сontactList').resize(() => {
         sizeHeight();
     });
 
     const socket = io();
-    socket.on('userList', function (userList) {
+
+    socket.on('userList', (userList) => {
         for (let user of userList) {
             $('.list-group').prepend($('<li class="list-group-item" id=' + user + '>').text(user));
         }
@@ -35,18 +36,18 @@ $(document).ready(function () {
 
     let nick = $('#nickname').val();
     socket.emit('disconnect', nick);
-    socket.on('disconnect', function (nickName) {
+    socket.on('disconnect',  (nickName) => {
         if (($('#' + nickName)) != null) {
             $('#' + nickName).remove();
         }
     });
 
-    $(window).unload(function () {
+    $(window).unload( () => {
         let nick = $('#nickname').val();
         socket.emit('chat message', '[' + (new Date).toLocaleTimeString() + '] ' + 'user "' + nick + '": disconnected');
     });
 
-    $('form').submit(function () {
+    $('form').submit(() => {
         if ($('#m').val() != '') {
             socket.emit('chat message', '[' + (new Date).toLocaleTimeString() + '] ' + $('#nickname').val() + ': ' + ($('#m').val()));
             $('#m').val('');
@@ -54,17 +55,17 @@ $(document).ready(function () {
         }
         return false;
     });
-    socket.on('chat message', function (msg) {
+    socket.on('chat message', (msg) => {
         $('#messages').prepend($('<li>').text(msg));
     });
 
-    $("#login").click(function () {
+    $("#login").click(() => {
         let nick = $('#nickname').val();
         if ($('#nickname').val().length > 2) {
             $('#myModal').modal('hide');
             $('#btnSend').prop("disabled", false);
             socket.emit('news', nick);
-            socket.on('news', function (nickName) {
+            socket.on('news', (nickName) => {
                 $('.list-group').prepend($('<li class="list-group-item" id=' + nickName + '>').text(nickName));
             });
             socket.emit('chat message', '[' + (new Date).toLocaleTimeString() + '] ' + 'user "' + nick + '": connected');
@@ -74,7 +75,7 @@ $(document).ready(function () {
         }
     });
 
-    $("#btnExit").click(function () {
+    $("#btnExit").click(() => {
         window.location.reload();
     });
 });
